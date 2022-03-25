@@ -23,7 +23,8 @@ section, summary, time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;}
+	vertical-align: baseline;	
+}
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -2814,10 +2815,12 @@ input, select, textarea {
 	}
 
 		.features li {
-			width: calc(33.33333% - 2em);
+			width: calc(90% - 2em);/*width: calc(33.33333% - 2em);*/
 			margin-left: 2em;
 			margin-top: 3em;
 			padding: 0;
+			text-align: left;
+			font-weight: 350;
 		}
 
 			.features li:nth-child(1), .features li:nth-child(2), .features li:nth-child(3) {
@@ -3121,7 +3124,7 @@ input, select, textarea {
 				#header.alt .logo img {
 					display: block;
 					margin: 0 auto;
-					max-width: 0%;
+					max-width: 5%;
 				}
 
 		@media screen and (max-width: 1280px) {
@@ -3967,6 +3970,20 @@ input, select, textarea {
 
 		}
 
+		.iconfont {
+			font-family: "iconfont" !important;
+			font-size: 21px;
+			font-style: normal;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
 		
-		  
-	
+		
+		
+		
+		.icon-email:before {
+			content: "\e605";
+		}
+		
+		
+		
