@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>数据存储</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" src="assets/js/comment.js"></script>
+	</head>
+
+	
+	<!--style>
+	li {
+		width: 300px;
+		padding:5px;
+		background-attachment: initial
+		font-size:15px;
+		margin:15 px 0;
+	}
+	li a {
+		float: right;
+	}
+	</style-->
+	
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>数据存储和备份（待更新）</h1>
+						<p>2022.04.17</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="#" ><b>About me</b></a></li>
+						<li><a href="#" > <b>Publications</b> </a></li>
+						<li><a href="#"> <b>Research</b> </a></li>
+						<li><a href="blog.html" class="active"> <b>Blog</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+							<h2>问题描述：</h2>
+							<p>需要海量个人存储、备份空间。射电干涉阵数据几个T，加上处理数据的存储空间需要double，以及备份以前处理完的数据结果。
+							<li>目前手头的设备：1台 macbookpro 内置固态硬盘500GB；3个2TB希捷移动机械硬盘；
+								2个4TB希捷移动机械硬盘；1个5TB希捷移动机械硬盘；1个5TB西部数据移动机械硬盘（xfs文件系统）。 </li>
+							<li>存储空间占用率不高：虽然总共有24TB的移动存储空间，但因为是单个的移动硬盘，每个硬盘实际上会空出几十GB鸡肋的空间。</li>
+							<li>备份和整理数据麻烦：常常同时使用macbookpro仅有的两个usb接口一个读取一个写入。</li>
+							<li>移动硬盘丢数据风险高。</li>
+							</p>
+
+							<h2>解决方法：</h2>
+						 	<div class="col-12"><span class="image fit"><img src="images/数据备份.pdf" alt="" /></span></div>
+							<p>
+							<li>理想方案：移动电脑+移动硬盘日常处理数据 需要~2T。
+									 <br>办公室独立IP的 NAS 需要~42T（工作区12T，备份区30T），无论一定电脑在何地，都可以与联网的办公室NAS同步。
+									 <br>内网异地 NAS 需要~27T（工作区12T，备份区15T），比如每天回家后内网同步移动电脑数据。
+									 <br>移动硬盘用于归档需要~17T。
+							</li>
+							<li>预算：NAS（Network Attached Storage：网络附属存储）。
+							</li>
+						    </p>
+							<h3>数据备份的321原则：</h3>
+							<p> 3：存储 3 份完整文件，一份原件加上两份拷贝。
+								<br>2：将文件起码保持在两种不同的介质上。
+								<br>1：将一份拷贝保存在异地。
+								所谓的「介质」，是指内置硬盘、外置硬盘、光盘或者 U 盘等不同的存储介质
+							</p>
+							<h3>数据备份等级和策略：</h3>
+							<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th>数据类型\数据备份区域</th>
+												<th>移动电脑+移动硬盘</th>
+												<th>办公室NAS备份</th>
+												<th>异地NAS备份</th>
+												<th>移动硬盘备份</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>日常工作数据（~2T）</td>
+												<td>Yes</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（每周）</td>
+											</tr>
+											
+											<tr>
+												<td>正在处理数据（~10T）</td>
+												<td>Yes</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（实时工作区）</td>
+												<td>No</td>
+											</tr>											
+											<tr>
+												<td>已完成项目的数据（~15T）</td>
+												<td>No</td>
+												<td>Yes（定期备份区）</td>
+												<td>Yes（定期备份区）</td>
+												<td>Yes（定期）</td>
+											</tr>
+											<tr>
+												<td>观测原始数据（~15T）</td>
+												<td>No</td>
+												<td>Yes（备份区）</td>
+												<td>No</td>
+												<td>Yes</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+													<td colspan="0"></td>
+													<!--td>Note：Yes代表实时备份，No代表不备份。</td-->
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<p>日常工作数据：包括已完成的主要结果fits文件，图、表和文档等，核心自有数据。</p>
+
+							<h3>参考：</h3>
+								https://sspai.com/post/39591
+								<br>https://forum.huawei.com/enterprise/zh/thread-805855.html
+								<br>
+
+
+
+							</section>
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+									<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+									[<span id="good"></span>]
+							</span>
+						</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+
+
+	</body>
+	
+
+</html>
