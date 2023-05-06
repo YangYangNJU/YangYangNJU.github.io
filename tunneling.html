@@ -58,14 +58,14 @@
                 <p>打开本地终端登录远端服务器，输入：  </p>
                 <pre><code> ./carta-v3.0-x86_64.AppImage --no_brower </code></pre>
                 <p>CARTA在linux服务器上需要root安装（没有权限），要么AppImage下载，但是一直苦于无法远程打开，文件carta-v3.0-x86_64.AppImage
-                  <br>是直接下载AppImage格式文件。执行完上面的命令后，会有一行返回信息如下
+                  是直接下载AppImage格式文件。执行完上面的命令后，会有一行返回信息如下
                   <br>“CARTA is accessible at http://10.10.10.1:3003/?tokeny3472848213789789”
                   如果在本地浏览器中打开怎么也链接不上，尝试10.10.10.1换成服务器IP也不行。</p>
                 <p>打开另一个终端，输入： </p>
                 <pre><code> ssh -L -N -f localhost:2021:localhost:3003 yy@Vrigo </code></pre>
                 <p> 打开浏览器，输入 http://localhost:2021/?tokeny3472848213789789
                 <br>
-                就可以在本地打开CARTA了！这里一定要带上?tokeny3472848213789789，因为没有权限无法加载，不想jupyter notebook有手动输入token的机会。</p>
+                就可以在本地打开CARTA了！这里一定要带上?tokeny3472848213789789，因为没有权限无法加载，不像jupyter notebook有手动输入token的机会。</p>
                 
 								
 
