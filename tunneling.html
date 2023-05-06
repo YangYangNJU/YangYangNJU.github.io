@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>rsync</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>ssh tunneling 实现本地访问远端服务器上的 jupyter notebook 和 CARTA</h1>
+						<p>2023.05.07</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>问题描述：ssh到远端服务器时，需要图形界面交互式操作，ssh -XY 传输太慢。</h2>
+								<p>对于可以用浏览器打开的软件可以用ssh tunneling的方法，将远端服务器上的数据和软件加载到本地机器上使用。</p>
+                <p>打开本地终端登录远端服务器，进入python环境，输入：  </p>
+                <pre><code> jupyter notebook --port=20000 </code></pre>
+                <p>这里20000作为远端端口，可自定义。 </p>
+                <p>打开另一个终端，输入： </p>
+                <pre><code> ssh -L -N -f localhost:2001:localhost:20000 yy@Vrigo </code></pre>
+                <p>这里-L指定port forwarding的配置，-N告诉ssh没有命令要被远端执行，-f告诉ssh在后台执行，2001是转发到本地的端口，20000是远端端口。 
+                <br>
+                yy是用户名，Virgo是服务器名，打开浏览器，输入 http://localhost:2001/
+                <br>
+                就可以在本地打开jupyter notebook了，这比ssh -XY快多了！</p>
+                
+                
+                <h2>同样的方法也可以应用到CARTA的使用上！</h2>
+                <p>打开本地终端登录远端服务器，输入：  </p>
+                <pre><code> ./carta-v3.0-x86_64.AppImage --no_brower </code></pre>
+                <p>CARTA在linux服务器上需要root安装（没有权限），要么AppImage下载，但是一直苦于无法远程打开，文件carta-v3.0-x86_64.AppImage
+                  <br>是直接下载AppImage格式文件。执行完上面的命令后，会有一行返回信息如下
+                  <br>“CARTA is accessible at http://10.10.10.1:3003/?tokeny3472848213789789”
+                  如果在本地浏览器中打开怎么也链接不上，尝试10.10.10.1换成服务器IP也不行。</p>
+                <p>打开另一个终端，输入： </p>
+                <pre><code> ssh -L -N -f localhost:2021:localhost:3003 yy@Vrigo </code></pre>
+                <p> 打开浏览器，输入 http://localhost:2021/?tokeny3472848213789789
+                <br>
+                就可以在本地打开CARTA了！这里一定要带上?tokeny3472848213789789，因为没有权限无法加载，不想jupyter notebook有手动输入token的机会。</p>
+                
+								
+
+								<h3>参考：</h3>
+									<br>bing里面搜索ssh隧道转发
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>
