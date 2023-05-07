@@ -67,7 +67,9 @@
                 <br>
                 就可以在本地打开CARTA了！这里一定要带上?tokeny3472848213789789，因为没有权限无法加载，不像jupyter notebook有手动输入token的机会。</p>
                 
-								
+                <h2>以上是在linux系统下测试，os系统下可能会有报错</h2>
+                <p>os的终端中运行ssh -L -N -f localhost:2001:localhost:20000 yy@Vrigo，会出现“Bad local forwarding specification '-N'”的报错，
+		<br>替换成 ssh -fNL localhost:2001:localhost:20000 yy@Vrigo 就解决了。 </p>
 
 								<h3>参考：</h3>
 									<br>bing里面搜索ssh隧道转发
