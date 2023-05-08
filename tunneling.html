@@ -43,7 +43,7 @@
 								<h2>问题描述：ssh到远端服务器时，需要图形界面交互式操作，ssh -XY 传输太慢。</h2>
 								<p>对于可以用浏览器打开的软件可以用ssh tunneling的方法，将远端服务器上的数据和软件加载到本地机器上使用。</p>
                 <p>打开本地终端登录远端服务器，进入python环境，输入：  </p>
-                <pre><code> jupyter notebook --port=20000 </code></pre>
+                <pre><code> jupyter notebook --no-browser --port=20000 </code></pre>
                 <p>这里20000作为远端端口，可自定义。 </p>
                 <p>打开另一个终端，输入： </p>
                 <pre><code> ssh -L -N -f localhost:2001:localhost:20000 yy@Vrigo </code></pre>
