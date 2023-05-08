@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>problems</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>problems.log</h1>
+						<p>2023.05.08--the day I died</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>2023.05.08 ssh 防火墙</h2>
+								<p>今天下午我不能从笔记本ssh到Virgo了，昨晚还可以，很可能是上午在配置wiki的时候做了什么导致的。
+                提示错了”operation timed out“，但是可以从笔记本ping通Virgo，开始怀疑Virgo的IP被禁了，
+                但Virgo仍然能ssh到另外的服务器上，可能是ssh server的问题。
+                </p>
+                <p>下面的命令，检查ssh的状态，没发现问题。</p>
+                <pre><code> systemctl status ssh 
+                <br>service ssh status </code></pre>
+                
+                <p>重新回顾我上做做了什么和ssh有关测事情。发现我运行了一条：</p>
+                <pre><code>sudo ufw allow ssh </code></pre>
+                <p>我打开/安装了ssh的防火墙，难道我之前没有？ </p>
+                <p>检查防火墙状态：</p>
+                <pre><code>sudo ufw status </code></pre>
+                其中没有的ssh的port，添加相应的port号就恢复了！
+                <pre><code>sudo ufw allow XXXX </code></pre>
+                <p>随手把默认的22给禁了。</p>
+                <pre><code>sudo ufw deny 22 </code></pre>
+                <p>我爱解决问题！</p>
+
+
+
+
+								<h3>参考：</h3>
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>
