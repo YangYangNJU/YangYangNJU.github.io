@@ -46,7 +46,7 @@
                 <pre><code> jupyter notebook --no-browser --port=20000 </code></pre>
                 <p>这里20000作为远端端口，可自定义。 </p>
                 <p>打开另一个终端，输入： </p>
-                <pre><code> ssh -L -N -f localhost:2001:localhost:20000 yy@Vrigo </code></pre>
+                <pre><code> ssh -L -N -f localhost:2001:localhost:20000 yy@Virgo </code></pre>
                 <p>这里-L指定port forwarding的配置，-N告诉ssh没有命令要被远端执行，-f告诉ssh在后台执行，2001是转发到本地的端口，20000是远端端口。 
                 <br>
                 yy是用户名，Virgo是服务器名，打开浏览器，输入 http://localhost:2001/
@@ -62,14 +62,14 @@
                   <br>“CARTA is accessible at http://10.10.10.1:3003/?tokeny3472848213789789”
                   如果在本地浏览器中打开怎么也链接不上，尝试10.10.10.1换成服务器IP也不行。</p>
                 <p>打开另一个终端，输入： </p>
-                <pre><code> ssh -L -N -f localhost:2021:localhost:3003 yy@Vrigo </code></pre>
+                <pre><code> ssh -L -N -f localhost:2021:localhost:3003 yy@Virgo </code></pre>
                 <p> 打开浏览器，输入 http://localhost:2021/?tokeny3472848213789789
                 <br>
                 就可以在本地打开CARTA了！这里一定要带上?tokeny3472848213789789，因为没有权限无法加载，不像jupyter notebook有手动输入token的机会。</p>
                 
                 <h2>以上是在linux系统下测试，os系统下可能会有报错</h2>
-                <p>os的终端中运行ssh -L -N -f localhost:2001:localhost:20000 yy@Vrigo，会出现“Bad local forwarding specification '-N'”的报错，
-		<br>替换成 ssh -fNL localhost:2001:localhost:20000 yy@Vrigo 就解决了。 </p>
+                <p>os的终端中运行ssh -L -N -f localhost:2001:localhost:20000 yy@Virgo，会出现“Bad local forwarding specification '-N'”的报错，
+		<br>替换成 ssh -fNL localhost:2001:localhost:20000 yy@Virgo 就解决了。 </p>
 
 								<h3>参考：</h3>
 									<br>bing里面搜索ssh隧道转发
