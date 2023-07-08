@@ -73,7 +73,7 @@
                 <p>如何提高ssh登录安全系数：
 			<br>1. 更改ssh默认端口。
 			<br>2. 禁止root用户ssh登录。只允许某些user和group登录。
-			<br>3. 禁止明码登录，使用RSA私钥登录，但现在工作站上用户太多，以及其它需要临时登录的情况，如果你不许要考虑这些，如下操作禁止明码登录。
+			<br>3. 禁止明码登录，使用RSA私钥登录，但现在工作站上用户太多，以及其它需要临时登录的情况，如果你不许要考虑这些，如下操作禁止明码登录。</p>
 		<pre><code>sudo vi etc/ssh/sshd_config </code></pre>
 		修改Port，linux端口1024以下是系统保留，从1024-65535是用户使用的。这三条都是在sshd_config文件中修改。修改完后重启ssd服务。
 		<pre><code>systemctl restart sshd </code></pre>
@@ -101,8 +101,22 @@
 			<br>2. 注意文件命名，不要加后缀和点，否则可能不会执行。
 
 
-
-								<h3>参考：</h3>
+								
+		<h2>2023.07.08  周期性执行脚本的命令crontab</h2>
+		<p>安装和启动cron
+		<code>
+			安装：sudo apt-get install cron
+			启动：service cron start
+			重启：service cron restart
+			停止：service cron stop
+			检查状态：service cron status
+			查询cron可用的命令：service cron
+			检查Cronta工具是否安装：crontab -l
+		</code>
+		</p>
+			
+			
+			<h3>参考：</h3>
 							</section>
 							
 							 
