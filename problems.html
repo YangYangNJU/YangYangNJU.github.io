@@ -112,7 +112,19 @@
 			检查状态：service cron status
 			查询cron可用的命令：service cron
 			检查Cronta工具是否安装：crontab -l
+			使用帮助：man crontab
+			列出当前用户的cron任务：crontab -l
+			查看其他用户的cron任务：crontab -l -u username
+			编辑cron任务：crontab -e
+			* * * * * echo "test crontab is work or not" >> /var/www/html/testcrontab.txt 
+			移除已计划的cron任务：crontab -r
+			移除所有已计划的cron作业，且无需再次确认：crontab -ir
+
 		</code>
+		除了通过配置文件来处理计划cron作业之外，还有别的方法可以做到。如果你查看/etc目录，你会发现有这样的目录：cron.daily、cron.hourly、cron.monthly等等。因此，把cron脚本放入这些目录中，那么系统会根据这些目录名定时执行这些作业脚本的。
+		</p>
+		<p>
+	参考：https://blog.csdn.net/chszs/article/details/47276899
 		</p>
 			
 			
