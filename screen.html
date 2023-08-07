@@ -40,14 +40,15 @@
 
 						<!-- Content -->
 							<section id="content" class="main">
-								<h2>问题描述：远程登录服务器之后，执行一个程序需要很长的时间，但ssh时常断开，或者不能保持本地和服务器一直联络。</h2>
+								<h2>问题描述：远程登录服务器之后，执行一个程序需要很长的时间，但ssh时常断开，或者不能保持本地和服务器一直联络，因此程序不能完整执行。</h2>
 								<p>可以用screen命令将运行的程序放在后台，即使本地和服务器断联，该程序仍然会在服务器上执行。</p>
                 <p>安装screen</p>
                 
-                <pre><code> # CentOS
-                            yum install screen
-                            # Debian/Ubuntu
-                            apt install screen 
+                <pre><code> 
+		# CentOS
+                yum install screen
+                # Debian/Ubuntu
+                apt install screen 
                 </code></pre>
                 
                 <p>screen常用命令集 </p>
@@ -68,8 +69,15 @@
                 </code></pre>
                 <p> screen创建的虚拟终端有两个工作模式：Attached （表示当前screen正在为主终端使用，为活跃状态） 和 Detached（表示当前screen正在后台使用，为非激发状态），通常情况下，不需要关注上面的状态。
                 </p>
-                
-               
+		<p>
+		无法进入Attached状态虚拟终端，比如，并没有Ctril+a再按d退出并挂起虚拟终端，反而因为长时间没操作，或者本地网络掉包等问题，非正常退出虚拟终端，导致出现SSH连接服务器，并没有在虚拟终端内，
+		却出现Attached状态。使用screen -r name 无法进入，而使用screen -R name 会创建新的虚拟终端。使用下面的命令：
+		</p>
+		<pre><code> 
+                screen -d name      #把这个name的screen设置成Detach状态.
+		screen -r name	    #再回复进入这个screen
+                </code></pre>
+		
 
 								<h3>参考：</h3>
 									<br>https://zhuanlan.zhihu.com/p/405968623
