@@ -1,1 +1,142 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>tunneling</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>screen使用方法</h1>
+						<p>2023.08.07</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>问题描述：远程登录服务器之后，执行一个程序需要很长的时间，但ssh时常断开，或者不能保持本地和服务器一直联络。</h2>
+								<p>可以用screen命令将运行的程序放在后台，即使本地和服务器断联，该程序仍然会在服务器上执行。</p>
+                <p>安装screen</p>
+                
+                <pre><code> # CentOS
+                            yum install screen
+                            # Debian/Ubuntu
+                            apt install screen 
+                </code></pre>
+                
+                <p>screen常用命令集 </p>
+                
+                
+                <pre><code> 
+                screen -v      #检查版本号
+                screen -help   #打开帮助文档
+                screen -ls     #查看已经存在的screen终端
+                screen -S backup #新建一个名叫backup的虚拟终端，不会检录之前创建的screen，可能会创建一个同名的screen
+                screen -R backup #恢复一个叫backup的虚拟终端，如果没有就新建一个backup的虚拟终端
+                #在出现的虚拟终端中执行自己的程序，比如：
+                bash backup.sh
+                #然后，按Ctril+a，再按d，即可保持这个screen到后台并回到主终端
+                screen -r [pid/name] #恢复对应名字的screen
+                #如果不再需要这个虚拟终端，可以在此虚拟终端中用 exit 退出，就会回到主终端。
+                screen -R [pid/Name] -X quit  #screen运行程序确定已经停止运行了，也可以在主终端内，使用此命令释放
+                </code></pre>
+                <p> screen创建的虚拟终端有两个工作模式：Attached （表示当前screen正在为主终端使用，为活跃状态） 和 Detached（表示当前screen正在后台使用，为非激发状态），通常情况下，不需要关注上面的状态。
+                </p>
+                
+               
+
+								<h3>参考：</h3>
+									<br>https://zhuanlan.zhihu.com/p/405968623
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>
 
