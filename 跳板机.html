@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>跳板机</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>通过跳板机连接服务器下载数据</h1>
+						<p>2022.01.20</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>问题描述：</h2>
+								<p>数据在服务器A上，人家给我们提供了两个跳板机B和C的IP，我需要从没有固定IP的主机上先连接一个跳板机B或者C，才能再连接到服务器A。另外，密码非常长，而且需要输入两遍。</p>
+								<h3>通过密钥连接实现免密登陆服务器</h3>
+								<p>主机local的终端中输入下面的命令</p>
+								<pre><code>ssh-keygen</code></pre>
+								<p>生成秘钥。</p>
+								<p>再把公共密钥复制到跳板机B的.ssh/authorized_keys文件中。</p>
+								<p>登陆跳板机B的终端，如果没有authorized_keys文件，按一下方法新建，复制上一步的秘钥在此文件中</p>
+								<pre><code>mkdir .ssh/authorized_keys</code></pre>
+								<p>然后设置文件的权限</p>
+								<pre><code>chmod 700 .ssh/ <br>chmod 600 .ssh/authorized_keys	</code></pre>
+								<p>现在应该可以ssh name@IP免密从主机local登录跳板机B了。</p> 
+								<p>然后，我想用相同方法免密从跳板机B登陆服务器A，但是我手贱啊，登陆服务器A又需要输入冗长的免密，回车了n次表示抗议。再次准备输入密码的时候，被拒绝连接了，多次尝试错误密码，服务器A可能把跳板机B的IP封了。
+								于是我恍然大悟，难怪人家提供两个跳板机！</p>
+								<p>一看时间4点了，本来只是想下载数据的，3个小时过去了，看起来一点进展也没有。自我安慰也不是没有收获，增强了通过秘钥认证的记忆，理解了为啥人家非要通过一个跳板机连接服务器（为了安全重要服务器不使用公网），了解自己为啥被禁止连接（服务器使用防火墙限制了恶意IP地址）。 
+								这一晚上我从反面学了如何安全地使用ssh服务远程连接服务器。</p>
+								<h3>通过一次scp命令直接从服务器A复制数据到主机local</h3>
+								<p>用相同设置秘钥的方法，现在从主机local密钥连接到跳板机C，将跳板机C中~/.ssh/authorized_keys文件复制到服务器A的~/.ssh/authorized_keys位置。
+									在我的主机local中修改配置文件 ~/.ssh/config，没有就创建config，输入如下内容：
+									<pre><code>Host tiaoban 
+	HOSTNAME tiaobanjiC_IP 
+	Port 22 
+	User changes 
+										
+Host nginx 
+	HostName fuwuqiA_IP
+	Port 22 
+	User changes 
+	ProxyCommand ssh changes@tiaoban -W %h:%p </code></pre>
+	
+										<p>配置好后，在主机local的终端中，直接输入</p>
+										<pre><code>ssh nginx</code></pre>
+										<p>就可以登录这台跳板机C后面的服务器A了。现在可以简单地将数据从服务器A下载到没有固定IP的主机了！</p>
+										<pre><code>scp -r nginx:/storage/changes/data/21A-033_2021_09_06_T22_25_03.831 .</code></pre>
+										
+										<p>解决问题还是挺有趣，感谢搜索引擎。</p>
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>

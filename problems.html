@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>problems</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>problems.log</h1>
+						<p>2023.05.08--the day I died</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>2023.05.08  ssh  防火墙</h2>
+								<p>今天下午我不能从笔记本ssh到Virgo了，昨晚还正常，很可能是上午在配置wiki的时候做了什么导致的。
+                提示错了”operation timed out“，但是可以从笔记本ping通Virgo，开始怀疑Virgo的IP被禁了，
+                但Virgo仍然能ssh到另外的服务器上，可能是ssh server的问题。
+                </p>
+                <p>下面的命令，检查ssh的状态，没发现问题。</p>
+                <pre><code> systemctl status ssh 
+                <br>service ssh status </code></pre>
+                
+                <p>回顾我上午做了什么和ssh有关的事情。发现我运行了一条：</p>
+                <pre><code>sudo ufw allow ssh </code></pre>
+                <p>我打开/安装了ssh的防火墙，难道我之前没有？ </p>
+                <p>检查防火墙状态：</p>
+                <pre><code>sudo ufw status </code></pre>
+                其中没有我用的ssh的port号，添加相应的port号就恢复了！
+                <pre><code>sudo ufw allow XXXX </code></pre>
+                <p>顺手把默认的22给禁了。</p>
+                <pre><code>sudo ufw deny 22 </code></pre>
+                <p>我爱解决问题！</p>
+
+
+
+		<h2>2023.07.08  未知IP暴力破解跑了7000多条试图ssh登录服务器</h2>
+		<p>Ubuntu查看失败登录记录：
+			<pre><code> sudo lastb
+			<br>sudo lastb -n 30 #查看最新的30条 
+			<br>sudo lastb |awk ‘{print $3}’|sort |uniq -c  #查看失败记录并统计次数。 
+			<br>sudo last #显示成功登录的信息
+			<br>sudo cat /var/log/auth.log #因为开了一个每分钟执行一次的cron任务，此log基本被cron刷屏。</code></pre>
+                </p>
+                <p>如何提高ssh登录安全系数：
+			<br>1. 更改ssh默认端口。
+			<br>2. 禁止root用户ssh登录。只允许某些user和group登录。
+			<br>3. 禁止明码登录，使用RSA私钥登录，但现在工作站上用户太多，以及其它需要临时登录的情况，如果你不许要考虑这些，如下操作禁止明码登录。
+		<pre><code>sudo vi etc/ssh/sshd_config </code></pre>
+		修改Port，linux端口1024以下是系统保留，从1024-65535是用户使用的。这三条都是在sshd_config文件中修改。修改完后重启ssd服务。
+		<pre><code>systemctl restart sshd </code></pre>
+			<br>4. 将恶意的IP放进/etc/hosts.deny,把允许的IP放进/etc/hosts.allow。
+			<br>这里可以使用一些脚本和方法，定时一段时间，检查出恶意IP，然后自动放进 /etc/hosts.deny。
+			<br>比如，在/etc/cron.hourly/文件夹中放一个脚本，每小时检查一次日志，链接超过10次拉黑。
+			<pre><code> 
+				#! /bin/bash
+				data=` cat /var/log/auth.log | grep "Failed password" | grep -v "times:" | grep -v "invaild user" | awk '{print $11}' | sort |uniq -c | awk 'print $2"="$1'`
+				for i in $data
+				do
+				IP=`echo $i |awk -F= '{print $1}'`
+				NUM=`echo $i |awk -F= '{print $2}'`
+				echo $IP $NUM
+				if [ $NUM -gt 10 ]; then
+					EXIST=`grep $IP /etc/hosts.deny |wc -l`
+					echo "$[EXIST]"
+					if [$[EXIST] -eq 0 ];then
+						echo "sshd:$IP:deny" >> /etc/hosts.deny
+					fi
+				fi
+				done
+			</code></pre>
+			<br>1. 注意Ubuntu 20.04可以直接用，其它环境需要按实际情况修改。
+			<br>2. 注意文件命名，不要加后缀和点，否则可能不会执行。</p>
+
+
+								
+		<h2>2023.07.08  周期性执行脚本的命令crontab</h2>
+		<p>安装和启动cron
+		<pre><code>
+			安装：sudo apt-get install cron
+			启动：service cron start
+			重启：service cron restart
+			停止：service cron stop
+			检查状态：service cron status
+			查询cron可用的命令：service cron
+			检查Cronta工具是否安装：crontab -l
+			使用帮助：man crontab
+			列出当前用户的cron任务：crontab -l
+			查看其他用户的cron任务：crontab -l -u username
+			编辑cron任务：crontab -e
+			* * * * * echo "test crontab is work or not" >> /var/www/html/testcrontab.txt 
+			移除已计划的cron任务：crontab -r
+			移除所有已计划的cron作业，且无需再次确认：crontab -ir
+
+		</code></pre>
+		除了通过配置文件来处理计划cron作业之外，还有别的方法可以做到。如果你查看/etc目录，你会发现有这样的目录：cron.daily、cron.hourly、cron.monthly等等。因此，把cron脚本放入这些目录中，那么系统会根据这些目录名定时执行这些作业脚本的。
+		</p>
+		<p>
+	参考：https://blog.csdn.net/chszs/article/details/47276899
+		</p>
+			
+			
+			<h3>参考：</h3>
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>

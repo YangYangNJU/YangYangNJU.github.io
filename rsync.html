@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>rsync</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>rsync实现增量备份</h1>
+						<p>2023.02.10</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<h2>问题描述：</h2>
+								<p>将本地工作站（Ubuntu）的数据向NAS备份，数据目前2T，扩充之后最大到12T。
+								虽然NAS上有一些可以实现备份的套件，但是均不好用（比如,active backup for business），传输速率慢，并且容易中断。
+								经过一番尝试之后，发现最基本的rsync反而最可行。</p>
+<pre><code>
+##### variables #####
+NOW=$(date +%Y.%m.%d.%H:%M:%S) # time when script is run
+RSYNCOPT=av # /usr/bin/rsync options
+SERVER=10.0.0.1 # server ID
+SCR=/media/data8t  # the source	directory 
+backup=/volume1/data8t # the destination directory
+USER=yy #the user name at the server
+HOSTNAME=purple # the name of the server
+															
+##### begin script #####
+									
+if ping -c 1 "$SERVER" ; then    #测试服务器IP是否连通，是，返回1
+	if [[ -e "$SCR" ]] ; then  #如果source文件夹存在，返回1
+		if ssh "$HOSTNAME" "[[ ! -e ${backup} ]]" ; then  #登录服务器，如果备份文件夹不存在，返回1
+			ssh "$USER"@"$SERVER" "mkdir -p ${backup}" #登录服务器，创建备份文件夹
+		fi
+		if ssh "$HOSTNAME" "[[ -e ${backup}/current ]]" ; then #登录服务器，如果最近存在最近本分版本的链接，返回1
+		rsync -"$RSYNCOPT" --link-dest "$backup"/current/ "$SCR/" "$HOSTNAME":"$backup"/"$NOW"  
+ 			#增量备份，将source文件夹和最近版本的本分对比，将新增文件存在备份文件中，注意是否在文件名后加/
+		ssh "$HOSTNAME" "rm -rf ${backup}/current" #登录服务器，删除已经比较过的current链接
+		else
+		rsync -"$RSYNCOPT" "$SCR" "$HOSTNAME":"$backup"/"$NOW"  #如果current链接不存在，实现完整备份。
+		fi
+	ssh "$HOSTNAME" "ln -s ${backup}/${NOW} ${backup}/current"  #登录服务器，创建最新备份的软连接
+	fi
+fi
+##### end script #####
+
+</code></pre>
+								
+								<p>在本地工作站中执行上面的bash文件</p>
+								<pre><code>. backup.sh</code></pre>
+								另外，可以用crontab 命令实现定时执行上面的脚本。
+								
+								<br>
+
+								<br>
+								<h3>参考：</h3>
+									https://www.linuxquestions.org/questions/linux-server-73/incremental-backups-with-rsync-link-dest-4175603276/">
+									<br>https://linuxconfig.org/how-to-create-incremental-backups-using-rsync-on-linux">
+									<br>https://mp.weixin.qq.com/s/70KgkPXIjrt132sQaAxbpQ
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>

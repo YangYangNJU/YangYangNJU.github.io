@@ -1,0 +1,225 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>数据存储</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script type="text/javascript" src="assets/js/comment.js"></script>
+	</head>
+
+	
+	<!--style>
+	li {
+		width: 300px;
+		padding:5px;
+		background-attachment: initial
+		font-size:15px;
+		margin:15 px 0;
+	}
+	li a {
+		float: right;
+	}
+	</style-->
+	
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>数据存储和备份（待更新）</h1>
+						<p>2022.04.17</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" ><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html" class="active"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+							<h2>问题描述：</h2>
+							<p>需要处理海量射电数据、备份数据。射电干涉阵数据几个T，加上处理数据的存储空间需要double，以及备份以前处理完的数据结果。
+								目前手头的设备：1台 macbookpro 内置固态硬盘500GB；3个2TB希捷移动机械硬盘；
+								2个4TB希捷移动机械硬盘；1个5TB希捷移动机械硬盘；1个5TB西部数据移动机械硬盘（xfs文件系统）。
+								总共24T，其中已使用~18T，有~4T完整未使用空间，剩下2T分散于几个硬盘中无法利用。
+								18T的已用空间中的数据也亟待整理，可能有一定冗余，但一个一个硬盘倒来倒去整理太麻烦。
+							<li>存储空间占用率不高。虽然总共有24TB的移动存储空间，但存储空间不连续，每个硬盘实空出几十上百GB鸡肋的空间。</li>
+							<li>备份和整理数据麻烦。常常同时使用macbookpro仅有的两个usb接口一个读取一个写入，导致电脑其它操作特别慢。</li>
+							<li>移动硬盘丢数据风险高。</li>
+							<li>移动硬盘文件系统和电脑系统不兼容。比如 mac os 无法读写xfs文件系统。</li>
+							</p>
+
+							<h2>解决方法：</h2>
+						 	<div class="col-12"><span class="image fit"><img src="images/数据备份.pdf" alt="" /></span></div>
+							<p>
+							<li>理想方案：移动电脑+移动硬盘日常处理数据 需要~2T。
+									 <br>办公室独立IP的 NAS 需要~42T（工作区12T，备份区30T），无论移动电脑在何地，都可以与联网的办公室NAS同步。
+									 <br>内网 NAS 需要~27T（工作区12T，备份区15T），比如每天回家后内网同步移动电脑数据。
+									 <br>移动硬盘用于归档需要~17T。
+							</li>
+							<li>实际方案：待更新。。。</li>
+							</p>
+							<h3>NAS预算：</h3>
+							<p>NAS（Network Attached Storage：网络附属存储），想必两个近30T的 NAS 需要上万了，还得等有空结合预算，
+								估算一个经济合理的存储空间的NAS代替上面的理想方案。
+
+
+						
+							</p>
+							<h3>机械硬盘主要分垂直式和叠瓦式：</h3>
+							<p>CMR 垂直式（传统磁记录）：会在磁道与磁道之间留有空隙，来避免磁道之间信号的干扰，所有数据都会从磁道上经过，
+								优点是：无论顺序读写还是4K随机速度都较好，而且寿命长，缺点是单碟容量低。
+								<br>SMR 叠瓦式（叠瓦式磁记录）：优点是容量大，缺点是速度慢，特别是4K随机读写。由于采用了磁道叠加式，
+								把几个磁道叠加一起从而同体积能容乃更多的磁道，但因为机械硬盘的磁头比读写的磁道要大导致每次数据擦写都会影响到下一条磁道数据，
+								为了解决这个办法会先把下一个磁道数据先备份出来放进缓存空间(SMR缓存空间一般256Gb，看起来比CMR式的64G大，但并不是优势，
+								因为SMR本身就需要更大的缓存空间)，然后再从新写入，但这时候又会影响到下一条磁道，进而又会重复以上操作。
+								所以对于经常存储零散文件使用的机械硬盘一定要购买CMR垂直式硬盘</p>
+							<h3>机械硬盘是内置还是外置？</h3>
+								<p>内置：价格便宜，接口sata等，速度比usb3.0快，数据的写入写出也更快。缺点：不能移动。
+								</p>
+							<h3>接口种类：</h3>
+								<p>USB,SATA,PCI-E,M.2等。
+								<br>只比较我用到的两类。USB 3.0的5Gbps（/10）速度实际上是理论500MB/s，现在移动硬盘接口是USB3.0；
+								机箱内常常是SATA3 6Gbps （/10）的理论速度则是600MB/s，SATA2出现在老主板上，如果是SATA2，就没必要买太好的SSD（固态硬盘）了。
+								<br>Serial Advanced Technology Attachment。使用SATA（Serial ATA）口的硬盘又叫串口硬盘。
+								Serial ATA采用串行连接方式，串行ATA总线使用嵌入式时钟信号，具备了更强的纠错能力，与以往相比其最大的区别在于能对传输指令（
+								不仅仅是数据）进行检查，如果发现错误会自动矫正，这在很大程度上提高了数据传输的可靠性。串行接口还具有结构简单、支持热插拔的优点。
+								<br>M.2接口是Intel推出的一种替代mSATA的新的接口规范，也就是我们以前经常提到的NGFF，即Next Generation Form Factor。
+								M.2接口目前支持两种通道总线，一个是SATA总线，一个是PCI-E总线。当然，SATA通道由于理论带宽的限制（6Gb/s）,
+								极限传输速度也只能到600MB/s，但PCI-E通道就不一样了，带宽可以达到10Gb/s，所以看似都为M.2接口，但走的“道儿”不一样，
+								速度自然也就有了差别。
+								<br>在传统SATA硬盘中，当我们进行数据操作时，数据会先从硬盘读取到内存，再将数据提取至CPU内部进行计算，计算后写入内存，
+								存储至硬盘中；而PCI-E就不一样了，数据直接通过总线与CPU直连，省去了内存调用硬盘的过程，传输效率与速度都成倍提升。简单的说，
+								我们可以把两种通道理解成两辆相同的汽车，PCI-E通道的汽车就像是在高速上行驶，而SATA通道的汽车就像是在崎岖山路上行驶。很显然，
+								PCI-E SSD传输速度远远大于SATA SSD。目前PCI-E接口通道有PCI-E 2.0 x2及PCI-E 3.0 x4两种，最大速度达到32Gbps.另外，
+								由于PCI-E会占用总线通道，入门以及中端平台CPU通道数较少，都不太适合添加PCI-E SSD，只有Z170，或者是X79、X99这样顶级平台，
+								才可以完全发挥PCI-E SSD的性能。总的来说，如果你是一个不差钱的土豪，那么就 PCI-E SSD吧！
+								
+								</p>
+
+							<h3>数据备份的321原则：</h3>
+							<p> 3：存储 3 份完整文件，一份原件加上两份拷贝。
+								<br>2：将文件起码保持在两种不同的介质上。
+								<br>1：将一份拷贝保存在异地。
+								所谓的「介质」，是指内置硬盘、外置硬盘、光盘或者 U 盘等不同的存储介质
+							</p>
+							<h3>数据备份等级和策略：</h3>
+							<div class="table-wrapper">
+									<table>
+										<thead>
+											<tr>
+												<th>数据类型\数据备份区域</th>
+												<th>移动电脑+移动硬盘</th>
+												<th>办公室NAS备份</th>
+												<th>异地NAS备份</th>
+												<th>移动硬盘备份</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>日常工作数据（~2T）</td>
+												<td>Yes</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（每周）</td>
+											</tr>
+											
+											<tr>
+												<td>正在处理数据（~10T）</td>
+												<td>Yes</td>
+												<td>Yes（实时工作区）</td>
+												<td>Yes（实时工作区）</td>
+												<td>No</td>
+											</tr>											
+											<tr>
+												<td>已完成项目的数据（~15T）</td>
+												<td>No</td>
+												<td>Yes（定期备份区）</td>
+												<td>Yes（定期备份区）</td>
+												<td>Yes（定期）</td>
+											</tr>
+											<tr>
+												<td>观测原始数据（~15T）</td>
+												<td>No</td>
+												<td>Yes（备份区）</td>
+												<td>No</td>
+												<td>Yes</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+													<td colspan="0"></td>
+													<!--td>Note：Yes代表实时备份，No代表不备份。</td-->
+											</tr>
+										</tfoot>
+									</table>
+								</div>
+								<p>日常工作数据：包括已完成的主要结果fits文件，图、表和文档等，核心自有数据。</p>
+
+							<h3>参考：</h3>
+								https://sspai.com/post/39591
+								<br>https://forum.huawei.com/enterprise/zh/thread-805855.html
+								<br>https://zhuanlan.zhihu.com/p/75880470
+								<br>https://blog.csdn.net/shuai0845/article/details/98330290
+
+
+
+							</section>
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+									<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+									[<span id="good"></span>]
+							</span>
+						</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+
+
+	</body>
+	
+
+</html>
