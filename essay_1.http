@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<!--
+	Stellar by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>essay1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="shortcut icon" href="images/star.png" type="images/png"/>
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1>你是不是也听过“比你聪明的人还比你努力”？</h1>
+						<p>2023.11.29</p>
+					</header>
+
+				<!-- Nav -->
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html" class="active"><b>About me</b></a></li>
+						<li><a href="index.html" > <b>Publications</b> </a></li>
+						<li><a href="index.html"> <b>Research</b> </a></li>
+						<li><a href="笔记.html"> <b>笔记</b> </a></li>
+					</ul>
+				</nav>
+
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Content -->
+							<section id="content" class="main">
+								<p>人在不同的位置会有不同的想法，比如，学生听到导师说那谁假期也来办公室做科研，你怎么不来，心里会想真是黑心资本家呀。工作后没有人要求你假期做科研，但你观察到老板早八晚十的科研作息，听说院士每天8点就已经在食堂吃完了早饭，并且晚上很晚离开办公室。亦或者听说资深前辈把看文献当休息。你会不会想起这句：比你聪明的人还比你努力。
+                <br>
+聪明和努力之间需要一些连接，比如自我驱动力和目标。你身边一定有一些刚开始很努力但怎么也不见有成果，后来碌碌无为的人，说明只有努力不够。努力就像燃料，积累越来越多的燃料，朝着对的方向，可以达到目标，不然也可能爆炸，受到抑制甚至会熄灭。因此，需要自驱力，努力朝着自己目标的方向。自驱力和目标就需要聪明的脑阔做决策。
+                <br>
+如何获得目标和自驱力呢？设置具体的目标，长远目标和具体的小目标，小目标更重要，收获小目标会给你正反馈，增加自驱力，总之，一口吃不成胖子，大部分现代人都有经验。但有时候你会感觉很疲惫，不要埋怨自己，或许身体在给你信号，你是不是很久没有训练了？你是不是有社交困惑了？不要用简单的懒给自己定义。耐心和练习，你会发现自己的变化。
+                <br>
+本文中的成功请自己定义。</p>
+
+<h2>Does someone tell you “the one, who is smarter than you, is more struggling than you.” </h2>
+<div style="float: left; width: 50%;">
+    <p>Code 1:</p>
+    <pre>
+The people in different position will have different thought. Such as, If the mentors ask their students your peers are working in weekends, what do you do in your weekends? The students will say inside what a suppress boss. When you are working in an academic institution. No one ask you to work in weekend literally. But you will find your boss works in office from 8 am to 10 pm. Every morning the director also start work at 8 am in office, even though the official work time is from 9 am. In addition, some senior scientists regard reading papers as relaxation. Here do you recall the words “the one who is smarter than you is more struggling than you.”
+<br>
+There are some connection between smart and struggling, such as self-power and goals. You may know someone who is very struggling, but there are no successful results of them. It means only as a struggling person is not enough. The struggling seems like the fuel, you should accumulate enough fuel to drive yourself to the goal direction. Otherwise, explosion or extinction will happen. Therefore you need self power, and drive yourself to the right direction. Your smart brain will help you to choose.
+<br>
+How to achieve the goals and self power? You should plan the big goal and the small or detail goals. Specially the small goals are more important. If you achieve your small goals, you will achieve more self power, there is the positive feedback to you. This seem like to step ladder. Sometimes you will feel tired, don’t blaze yourself, your body is sending your message, do you need exercise? Or do you have social trouble? Don’t blame yourself as lazy simply. patient and practice, you will find your change.    
+<br>
+please define the success by yourself.    
+  </pre>
+</div>
+
+<div style="float: left; width: 50%;">
+    <p>Code 2:</p>
+    <pre>
+People in different positions have different perspectives. For example, if mentors ask their students what they do on weekends while their peers are working, the students may feel suppressed, thinking they have a demanding boss. Working in an academic institution, no one explicitly asks you to work on weekends. However, you may notice your boss working from 8 am to 10 pm. Even the director starts work at 8 am, although the official work time begins at 9 am. Additionally, some senior scientists consider reading papers as relaxation. This brings to mind the saying, "the one who is smarter than you is more struggling than you."
+<br>
+There is a connection between being smart and struggling, as it involves self-motivation and goals. You may know someone who is incredibly hardworking but does not achieve success. This implies that being driven alone is not enough. Struggling is like fuel; you need to accumulate enough fuel to propel yourself in the direction of your goals. Otherwise, burnout or failure may occur. Hence, you need self-motivation to navigate yourself in the right direction, utilizing your intelligence to make informed choices.
+<br>
+How can you achieve goals and cultivate self-motivation? It is essential to plan both big and small goals, with particular emphasis on the small or detailed ones. By achieving small goals, you gain self-confidence and receive positive feedback that fuels your motivation. This process is like ascending a step ladder. At times, you may feel tired. Instead of viewing yourself as lazy, consider whether your body is signaling a need for exercise or if there are social troubles that require attention. Be patient and practice self-reflection; you will witness your own transformation.
+<br>
+Define success for yourself.
+    </pre>
+</div>
+
+							</section>
+							
+							 
+							<span id="goodSpan" class="zan" style=" position: relative;left: 45%;"  >
+								<img src="images/good.png" onclick="sendGood()" style="width: 80px; height: 80px; " /> 
+								[<span id="good"></span>]
+							</span>
+							
+
+								
+					</div>
+
+				
+				<!-- Footer -->
+					<footer id="footer">
+								<!--form action="MAILTO:yangyang.astro@gmail.com" method="post" enctype="text/plain"-->
+								<!-- method="post" action="#" -->
+								<!-- form name="input" action="html_form_action.php" method="get" -->
+
+									<!--div class="row gtr-uniform">
+										<div class="col-6 col-12-xsmall">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+										</div>
+										<div class="col-6 col-12-xsmall">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>										
+										<div class="col-12">
+											<textarea name="message from my homepage" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+										</div>
+										<div class="col-12">
+											<ul class="actions">
+												<li><input type="submit" value="Send Message" class="primary" /></li>
+												<li><input type="reset" value="Reset" /></li>
+											</ul>
+										</div>
+									</div>
+								</form-->
+								<section>
+										<h2>Contact me</h2>
+										<dl class="alt">
+											<dt>Address</dt>
+											<dd>No.10 Yuanhua Road &bull; Qixia District &bull; Nanjing 210023&bull; China </dd>
+											<dt>Phone</dt>
+											<dd>(000) 000-0000 x 0000</dd>
+											<dt>Email</dt>
+											<dd><a href = "mailto:yyang@pmo.ac.cn?subject=Hello%20from%20githubhomepage">yyang@pmo.ac.cn</a></dd>
+										</dl>
+										
+								</section>
+					</footer>
+
+			</div>
+
+			<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>	
+			<script src="js/dianzan.js"></script>
+					
+
+	</body>
+</html>
